@@ -1,0 +1,14 @@
+version: '2'
+services:
+  dairy-admin:
+    image: ec/dairy-admin
+    ports:
+    - "8080:8080"
+    environment:
+    - spring.profiles.active=dev
+  dairy-api:
+    image: ec/ec-api
+    ports:
+    - "8081:8081"
+    environment:
+    - spring.profiles.active=dev

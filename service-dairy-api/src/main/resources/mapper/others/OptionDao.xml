@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.dao.others.OptionDao">
+
+  <!-- 根据参数大类ID查询业务参数表的参数列表 -->
+  <select id="queryOptionList" parameterType="string" resultType="com.yc.common.entity.others.OptionClass">
+    SELECT data_code, data_title FROM option_class WHERE type_id=#{typeId} and deleted = 0 ORDER BY sort_num
+  </select>
+
+  <!-- 根据参数大类ID和CODE查询业务参数详情 -->
+  <select id="getOptionByCode" resultType="com.yc.common.entity.others.OptionClass">
+    SELECT t.data_code, t.data_title
+    FROM option_class t
+    WHERE t.type_id = #{typeId}
+    and t.data_code = #{dataCode} and deleted = 0
+    limit 1
+  </select>
+
+  <!-- 根据参数大类ID和参数title查询业务参数详情 -->
+  <select id="getOptionByDataTitle" resultType="com.yc.common.entity.others.OptionClass">
+    SELECT t.data_code, t.data_title
+    FROM option_class t
+    WHERE t.type_id = #{typeId}
+    and t.data_title like concat('%',#{dataTitle},'%') and deleted = 0
+    limit 1
+  </select>
+</mapper>
