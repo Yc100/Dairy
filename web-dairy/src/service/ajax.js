@@ -2,7 +2,7 @@ import axios from 'axios'
 // import vm from '../main'
 import api from './apiConfig'
 // import store from '../vuex/store';
-import router from '../views/quarantine/router/router'
+import router from '../views/dairy/router/router'
 
 // const PRODUCT_URL = 'https://xxxx.com'
 // const MOCK_URL = 'http://mock.com'

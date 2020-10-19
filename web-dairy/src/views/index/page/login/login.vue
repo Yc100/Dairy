@@ -112,12 +112,15 @@ export default {
           localStorage.token = res.data
           this.$Message.success('登录成功,正在跳转...') //登录信息提示
           setTimeout(()=>{
-            let lastPath = this.$route.query.lastPath || '/views/quarantine/index.html#/datav'
+            //let lastPath = this.$route.query.lastPath || '/views/dairy/index.html#/datav'
+            let lastPath = this.$route.query.lastPath || '/views/dairy/index.html#/epidemicInfo'
             window.location.href = lastPath
           },1000)
         }else{
-          this.$Message.error(res.msg)  //登录信息提示
+            this.$Message.error(err.msg);
         }
+      }).catch(err=>{
+          this.$Message.error(err.msg);
       })
       await this.getUserInfo().then((res) => { }) //获取用户信息
     }

@@ -4,7 +4,7 @@
         <Col span="24" order="1" offset="0" style="height:55px">
           <Row :gutter="0">
               <!-- <Col span="1"><img src="../../assets/imgs/yjh.png" width="40" style="position:relative; top:8px;left:10px;"></img></Col> -->
-              <Col span="5" class="hiddenText">疫控管理端</Col>
+              <Col span="5" class="hiddenText">Memory Dairy 后台管理</Col>
               <!-- 未登录 -->
               <Col span="18" class-name="right" v-if="!loginStatus">
                 <a class="center" @click="$loginVerify">请登录</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

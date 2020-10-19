@@ -109,14 +109,15 @@ export default {
 			if(this.userInfo){
 				this.menu=[
 					//首页
-					{name:'平台管理系统',url:'datav',iconName:'iconkeshihua',privileges:[
+					/*{name:'平台管理系统',url:'datav',iconName:'iconkeshihua',privileges:[
 						// {name:'畜禽列表',url:'animalManage',privileges:[]},
-					]},
+					]},*/
 					// =========防疫站========
 					{name:'个人管理',url:'',iconName:'icongeren',privileges:[
 						{name:'个人信息',url:'epidemicInfo',privileges:[]},
 					]},
-					
+					{name:'用户管理',url:'userManage',iconName:'el-icon-user-solid',privileges:[]},
+
 
 
 				]
@@ -125,7 +126,7 @@ export default {
 
 		// 菜单跳转地址
 		jumpUrl(val){
-			this.$href('quarantine/index.html#/'+val.split('-')[1])
+			this.$href('dairy/index.html#/'+val.split('-')[1])
 		}
 
 

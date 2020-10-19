@@ -13,17 +13,17 @@ import store from 'vuexStore/store.js'  //引用vuex
  */
 
 import epidemicStation from './modules/epidemicStation.js'  // 防疫站
-import husbandryManage from './modules/husbandryManage.js'  //区级畜牧局
+import userManage from './modules/userManage'
 
 // 主页
-const index = resolve => require(['views/quarantine/page/index.vue'], resolve) 
+const index = resolve => require(['views/dairy/page/index.vue'], resolve)
 
 
 
 
 let route=[
   ...epidemicStation,
-  ...husbandryManage,
+  ...userManage,
 ]
 
 

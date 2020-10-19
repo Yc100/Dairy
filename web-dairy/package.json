@@ -1,7 +1,7 @@
 {
   "name": "web-dairy",
   "version": "1.0.0",
-  "description": "for Animal quarantine",
+  "description": "for Animal dairy",
   "author": "yc",
   "private": true,
   "scripts": {

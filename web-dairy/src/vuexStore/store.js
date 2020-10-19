@@ -7,7 +7,7 @@ import Vuex from 'vuex'
 
 
 import index from 'index/vuex/store'      //商城
-import quarantine from 'views/quarantine/vuex/store'        
+import dairy from 'views/dairy/vuex/store'
 /* 调试 */
 const debug = process.env.NODE_ENV !== 'production'
 
@@ -16,7 +16,7 @@ export default new Vuex.Store({
   // 组合各个模块
   modules: {
     ...index,
-    ...quarantine,
+    ...dairy,
   },
   strict: debug
 })
