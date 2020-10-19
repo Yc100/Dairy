@@ -10,7 +10,7 @@
   <div class="">
     <!-- 表格列表内容 -->
     <el-table :data="tableEpidemicData" style="width: 100%" @selection-change="legalSel">
-      <el-table-column label="姓名" prop="realName"></el-table-column>
+      <el-table-column label="姓名" prop="nickName"></el-table-column>
       <el-table-column label="岗位名称" prop="roleName"></el-table-column>
       <el-table-column label="年龄" prop="age"></el-table-column>
       <el-table-column label="性别">
@@ -40,7 +40,7 @@
       <Tag color="primary" style="margin-bottom:10px;">基本信息</Tag>
       <Card style="width:100%">
         <Row>
-          <Col offset="1" span="10">人员姓名：{{checkEpidemicData.realName}}</Col>
+          <Col offset="1" span="10">人员姓名：{{checkEpidemicData.nickName}}</Col>
           <Col span="13">年龄：{{checkEpidemicData.age}}</Col>
         </Row>
         <Row style="margin-top:10px;">
@@ -77,8 +77,8 @@
     <!--编辑员工信息 -->
     <Modal v-model="editEpidemicModal" title="编辑员工信息" width="60%">
       <Form ref="checkEpidemicData" :model="checkEpidemicData" :rules="ruleEditPastureValidate" :label-width="170">
-       <FormItem label="员工姓名" prop="realName">
-          <Input v-model="checkEpidemicData.realName" placeholder="请输入员工姓名" style="width:50%;"></Input>
+       <FormItem label="员工姓名" prop="nickName">
+          <Input v-model="checkEpidemicData.nickName" placeholder="请输入员工姓名" style="width:50%;"></Input>
         </FormItem>
         <FormItem label="员工年龄" prop="age">
           <Input v-model="checkEpidemicData.age"  placeholder="请输入员工年龄" style="width:50%;"></Input>
@@ -146,7 +146,7 @@
 
     <!-- 编辑员工管辖区域 -->
     <Modal v-model="managerAreaModel"  title="管辖区域调整">
-      <p><Icon type="md-person" size="17" /> 员工：{{setArea.realName}}</p>
+      <p><Icon type="md-person" size="17" /> 员工：{{setArea.nickName}}</p>
       <Row style="margin-top:1.5em;padding-left:0.5em;" v-if="areaList.length>0">
         <Col span="18">选择区域：
           <Select v-model="addAreaVal" clearable style="width:60%;" placeholder="请选择新增的区域">
@@ -171,7 +171,7 @@
     
     <!-- 修改岗位 -->
     <Modal v-model="editPostModel"  title="修改岗位">
-      <p style="margin-bottom:10px;"><Icon type="md-person" size="17" /> 员工：{{userEntity.realName}}</p>
+      <p style="margin-bottom:10px;"><Icon type="md-person" size="17" /> 员工：{{userEntity.nickName}}</p>
       <RadioGroup v-model="userEntity.roleId" vertical>
         <Radio :label="item.roleId" v-for="item in postList" :key="item.roleId">
           <span>{{item.roleName}}</span>
@@ -225,10 +225,10 @@ export default {
     return {
       accept:'image/jpg,image/jpeg,image/png',  //上传图片类型
       checkEpidemicModal:false, //查看员工信息model
-      checkEpidemicData:{realName:'',age:'',gender:'',mobile:'',idCard1:'',idCard2:'',password:'',username:''}, //查看员工数据
+      checkEpidemicData:{nickName:'',age:'',gender:'',mobile:'',idCard1:'',idCard2:'',password:'',username:''}, //查看员工数据
       editEpidemicModal:false, //编辑员工信息
       ruleEditPastureValidate: {
-        realName: [
+        nickName: [
           { required: true, message: '请输入员工姓名', trigger: 'blur' }
         ],
         age: [
@@ -268,12 +268,12 @@ export default {
       addAreaVal:'',  //新增的区域值
       manageAreaList:[] , //新增的区域数组
       editAreaData:{}, //编辑区域的行数据
-      userEntity:{id:'',roleId:'',realName:''},
+      userEntity:{id:'',roleId:'',nickName:''},
       editPostModel:false,
       setArea:{
 				id:'',
         areas:'',
-        realName:''
+        nickName:''
       },   //分配管理员
       token: localStorage.token || '',
     }
@@ -362,7 +362,7 @@ export default {
     editPost(data){
       this.userEntity.id = data.id;
       this.userEntity.roleId = data.roleId;
-      this.userEntity.realName = data.realName;
+      this.userEntity.nickName = data.nickName;
       this.editPostModel = true;
     },
 
@@ -435,7 +435,7 @@ export default {
 
     // 调整员工的管辖区域
     adjustArea(row){
-      this.setArea.realName = row.realName
+      this.setArea.nickName = row.nickName
       this.setArea.id = row.id
       this.manageAreaList = row.areaEntityList || []
       this.managerAreaModel = true

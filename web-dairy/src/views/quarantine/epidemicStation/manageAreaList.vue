@@ -86,7 +86,7 @@
 			<Form ref="editManagAreaValidate" :model="ManagAreaValidate" :label-width="170">
 				<FormItem label="区域管理人员" prop="chargePerson">
 					<Select v-model="ManagAreaValidate.userId" clearable style="width:50%;" placeholder="请选择区域管理人员">
-						<Option :value="item.id" v-for="item in userArr" :key="item.id">{{item.realName}}</Option>
+						<Option :value="item.id" v-for="item in userArr" :key="item.id">{{item.nickName}}</Option>
 					</Select>
 				</FormItem>
 			</Form>

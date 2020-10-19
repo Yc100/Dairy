@@ -9,9 +9,16 @@
 
 	<!-- 获取用户信息 -->
 	<select id="getUserInfo" parameterType="long" resultType="com.yc.common.entity.sys.SysUserEntity">
-		SELECT t.id, t.username, t.real_name, t.gender, t.head_url, t.mobile, t.email, t.admin_id, t.super_admin
+		SELECT t.id, t.username, t.nick_name, t.gender, t.head_url, t.mobile, t.email, t.admin_id, t.super_admin
 		FROM sys_user t
 		WHERE t.id=#{id}
 		LIMIT 1
+	</select>
+
+	<select id="getListPage" resultType="com.yc.common.entity.sys.SysUserEntity">
+		select * from sys_user where status=1
+		<if test="nickName != null and nickName != ''">
+			AND nick_name LIKE CONCAT('%', #{nickName}, '%')
+		</if>
 	</select>
 </mapper>

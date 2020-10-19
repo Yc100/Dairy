@@ -13,8 +13,8 @@
     	<Tag color="success">新增员工</Tag>
       	<br><br>
       	<Form ref="checkEpidemicData" :model="checkEpidemicData" :rules="ruleAddEpidemicValidate" :label-width="170">
-          <FormItem label="员工姓名" prop="realName">
-            <Input v-model="checkEpidemicData.realName" placeholder="请输入员工姓名" style="width:50%;"></Input>
+          <FormItem label="员工姓名" prop="nickName">
+            <Input v-model="checkEpidemicData.nickName" placeholder="请输入员工姓名" style="width:50%;"></Input>
           </FormItem>
           <FormItem label="员工年龄" prop="age">
             <Input v-model="checkEpidemicData.age" :min="1" placeholder="请输入员工年龄" style="width:50%;"></Input>
@@ -131,10 +131,10 @@ export default {
   data(){
     return {
       accept:'image/jpg,image/jpeg,image/png',  //上传图片类型
-      checkEpidemicData:{realName:'',age:'',gender:'',mobile:'',idCard1:'',idCard2:'',areas:'',superAdmin:0,username:'',password:'',roleId:''}, //员工数据
+      checkEpidemicData:{nickName:'',age:'',gender:'',mobile:'',idCard1:'',idCard2:'',areas:'',superAdmin:0,username:'',password:'',roleId:''}, //员工数据
       manageAreaList:[],
 		  ruleAddEpidemicValidate: {
-			  realName: [
+			  nickName: [
           { required: true, message: '请输入员工姓名', trigger: 'blur' }
         ],
         age: [

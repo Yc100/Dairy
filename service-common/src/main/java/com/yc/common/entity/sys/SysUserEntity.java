@@ -7,6 +7,7 @@ package com.yc.common.entity.sys;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.yc.common.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -22,6 +23,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper=false)
 @TableName("sys_user")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class SysUserEntity extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 	/**
@@ -35,7 +37,7 @@ public class SysUserEntity extends BaseEntity {
 	/**
 	 * 姓名
 	 */
-	private String realName;
+	private String nickName;
 	/**
 	 * 头像
 	 */
@@ -53,10 +55,6 @@ public class SysUserEntity extends BaseEntity {
 	 */
 	private String mobile;
 	/**
-	 * 部门ID
-	 */
-	private Long deptId;
-	/**
 	 * 超级管理员   0：否   1：是
 	 */
 	private Integer superAdmin;
@@ -65,19 +63,9 @@ public class SysUserEntity extends BaseEntity {
 	 */
 	private Integer status;
 	/**
-	 * 更新者
-	 */
-	@TableField(fill = FieldFill.INSERT_UPDATE)
-	private Long updater;
-	/**
 	 * 更新时间
 	 */
 	@TableField(fill = FieldFill.INSERT_UPDATE)
 	private Date updateDate;
-	/**
-	 * 部门名称
-	 */
-	@TableField(exist=false)
-	private String deptName;
 
 }

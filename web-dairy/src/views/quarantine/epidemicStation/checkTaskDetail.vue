@@ -40,7 +40,7 @@
 							<Row>
 									<Col span="2"><img :src="item.headUrl?item.headUrl:defaultHeadUrl" class="user-avatar" alt=""></Col>
 									<Col span="3">
-										<span> {{item.realName}}</span>
+										<span> {{item.nickName}}</span>
 									</Col>
 									<Col span="3">
 											<Tag color="error" style="border-radius:10px;">

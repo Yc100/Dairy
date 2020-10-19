@@ -14,7 +14,7 @@
               <Col span="18" class-name="right" v-if="loginStatus">
                 <a class="center">
                   <el-avatar size="small" :src="userInfo.headUrl || avatarImg" class="avatar-style"></el-avatar>&nbsp;&nbsp;
-                  {{userInfo.realName || '新用户'}}
+                  {{userInfo.nickName || '新用户'}}
                 </a>
                  <a class="center" style="margin-left:13px;">
                   <Tooltip :content="messageNum == 0 ? '当前暂无新的消息':'您有新的消息请查看'" placement="bottom" theme="light">

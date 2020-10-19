@@ -20,7 +20,7 @@
 		<br>
   <!-- 表格列表内容 -->
     <el-table :data="EpidemicData.data" style="width: 100%" @selection-change="legalSel">
-      <el-table-column label="姓名" prop="realName" width="200"></el-table-column>
+      <el-table-column label="姓名" prop="nickName" width="200"></el-table-column>
       <el-table-column label="年龄" prop="age" width="100"></el-table-column>
       <el-table-column label="性别" width="90">
         <template slot-scope="scope">
@@ -48,7 +48,7 @@
       <Tag color="primary" style="margin-bottom:10px;">基本信息</Tag>
       <Card style="width:100%">
         <Row>
-          <Col offset="1" span="10">人员姓名：{{checkEpidemicData.realName}}</Col>
+          <Col offset="1" span="10">人员姓名：{{checkEpidemicData.nickName}}</Col>
           <Col span="13">年龄：{{checkEpidemicData.age}}</Col>
         </Row>
         <Row style="margin-top:10px;">

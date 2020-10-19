@@ -12,7 +12,7 @@
       <div style="font-size:20px; color:#333333; padding:0 0px 10px 5px; font-weight:bolder;" >基本信息</div>
         <Card style="width:100%">
           <Row>
-            <Col offset="1" span="10">用户名称：{{userInfo.realName}}</Col>
+            <Col offset="1" span="10">用户名称：{{userInfo.nickName}}</Col>
             <Col span="13">邮箱：{{userInfo.email}}</Col>
           </Row>
           <Row style="margin-top:10px;">

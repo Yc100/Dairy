@@ -15,7 +15,7 @@
 		<Card class="card-list" style="width:85%;" v-for="(item,index) in workList.data" :key="index">
 			<div @click="lookDetail(item)">
 				<Row>
-					<Col span="22"><b>{{item.realName}} 《{{item.title}}》</b></Col>
+					<Col span="22"><b>{{item.nickName}} 《{{item.title}}》</b></Col>
 					<Col span="2">
 						<Tag color="error" style="border-radius:10px;" v-if="item.status == 1">{{item.status | messageStatus}}</Tag>
 						<Tag color="success" style="border-radius:10px;" v-if="item.status == 2">{{item.status | messageStatus}}</Tag>

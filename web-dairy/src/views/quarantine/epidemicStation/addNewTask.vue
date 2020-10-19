@@ -82,7 +82,7 @@
                @click.prevent.native="handleCheckAll">全选</Checkbox>
           </div>
           <CheckboxGroup v-model="formItem.areaIds" @on-change="checkAllGroupChange">
-              <Checkbox v-for="item in areaList" :key="item.id" :label="item.id">{{item.realName}}</Checkbox>
+              <Checkbox v-for="item in areaList" :key="item.id" :label="item.id">{{item.nickName}}</Checkbox>
           </CheckboxGroup>
         </FormItem>
         <FormItem label="选择人员：" prop="userIds">
@@ -93,7 +93,7 @@
                @click.prevent.native="handleCheckAll2">全选</Checkbox>
           </div>
           <CheckboxGroup v-model="formItem.userIds" @on-change="checkAllGroupChange2">
-              <Checkbox v-for="item in userList" :key="item.id" :label="item.id">{{item.realName}}</Checkbox>
+              <Checkbox v-for="item in userList" :key="item.id" :label="item.id">{{item.nickName}}</Checkbox>
           </CheckboxGroup>
         </FormItem>
         <div style="height:50px;text-align:center">

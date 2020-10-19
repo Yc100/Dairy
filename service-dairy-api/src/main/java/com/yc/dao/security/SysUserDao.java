@@ -8,6 +8,9 @@ import com.yc.common.dao.BaseDao;
 import com.yc.common.entity.sys.SysUserEntity;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * 系统用户
  * 
@@ -24,5 +27,7 @@ public interface SysUserDao extends BaseDao<SysUserEntity> {
 	 * @param id 用户编号
 	 */
 	SysUserEntity getUserInfo(long id);
+
+	List<SysUserEntity> getListPage(Map<String,Object> params);
 
 }
