@@ -87,5 +87,11 @@ public class ApiLoginController extends BasicController {
 		return new Result().message("退出成功");
 	}
 
+	@ApiOperation(value = "获取用户信息", notes = "获取用户信息")
+	@RequestMapping(value = "/getUserInfo", method = RequestMethod.GET)
+	public Result<SysUserEntity> getUserInfo() {
+		SysUserEntity userEntity = sysUserService.getUserInfo(getUserId());
+		return new Result<SysUserEntity>().message("获取用户信息成功").ok(userEntity);
+	}
 
 }

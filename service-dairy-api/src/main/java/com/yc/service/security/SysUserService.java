@@ -17,4 +17,11 @@ public interface SysUserService extends BaseService<SysUserEntity> {
 
 	SysUserEntity getByUsername(String username);
 
+	/**
+	 * 获取用户信息
+	 *
+	 * @param id 用户编号
+	 */
+	SysUserEntity getUserInfo(long id);
+
 }

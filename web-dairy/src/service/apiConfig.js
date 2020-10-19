@@ -1,0 +1,24 @@
+/*
+  真实接口地址配置
+ */
+let env = process.env.NODE_ENV
+// window.env = env
+// console.log("env",env)
+let api
+if (env === 'development') {  //开发环境
+  api = {
+    apiNomal : 'http://localhost:8090'
+  }
+} else if (env === 'testing') {
+  api = {
+    apiNomal : 'http://localhost:8090'
+  }
+} else { //生产环境
+    api = {
+      apiNomal : 'http://localhost:8090'
+      
+    }
+}
+
+
+export default api
