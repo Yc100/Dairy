@@ -79,7 +79,7 @@ export default {
       },1500)
     },
      //获取消息条数
-		async getNumber(){
+		/*async getNumber(){
 			await newUserWorkMsg().then(res=>{
 				if(res.code === 0){
 					this.messageNum = res.data !=0 ?res.data : '';
@@ -87,13 +87,13 @@ export default {
 					this.$Message.success(res.msg ||'获取成功');
 				}
 			})
-		},
+		},*/
   },
   mounted() {
 
   },
   created(){
-    this.getNumber()
+    //this.getNumber()
   }
 }
 </script>
