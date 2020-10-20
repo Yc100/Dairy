@@ -81,6 +81,8 @@ public interface Constant {
      * 当前页码
      */
     String PAGE = "page";
+
+    String OFFSET = "offset";
     /**
      * 每页显示记录数
      */

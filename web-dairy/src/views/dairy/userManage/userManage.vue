@@ -109,6 +109,9 @@ export default {
         },
         searchClick(){
             this.loading = true;
+            this.pageParams.offset = 0
+            this.pageParams.limit=5
+            this.pageParams.current=1
             this.loadUserList();
         },
 

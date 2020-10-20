@@ -56,7 +56,7 @@ public class UserController extends BasicController {
 
 	@ApiOperation(value = "所有用户列表",notes = "")
 	@ApiImplicitParams({
-			@ApiImplicitParam(name = Constant.PAGE, value = "当前页码，从1开始", paramType = "query", required = true, dataType="int") ,
+			@ApiImplicitParam(name = Constant.OFFSET, value = "偏移量，从0开始", paramType = "query", required = true, dataType="int") ,
 			@ApiImplicitParam(name = Constant.LIMIT, value = "每页显示记录数", paramType = "query",required = true, dataType="int") ,
 			@ApiImplicitParam(name = Constant.ORDER_FIELD, value = "排序字段", paramType = "query", dataType="String") ,
 			@ApiImplicitParam(name = Constant.ORDER, value = "排序方式，可选值(asc、desc)", paramType = "query", dataType="String"),
@@ -65,7 +65,10 @@ public class UserController extends BasicController {
 	@GetMapping("/listPage")
 	public Result<PageData<SysUserEntity>> getVaccinationListByLivestockId(@ApiIgnore @RequestParam Map<String, Object> params) {
 
-
+		Integer offset = Integer.valueOf(params.get(Constant.OFFSET).toString());
+		Integer limit = Integer.valueOf(params.get(Constant.LIMIT).toString());
+		Integer pageNo = offset / (limit<=0 ? 1 : limit) + 1;
+		params.put(Constant.PAGE,pageNo.toString());
 		PageData<SysUserEntity> page = sysUserService.getListPage(params);
 
 		return new Result<PageData<SysUserEntity>>().ok(page);
