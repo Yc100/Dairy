@@ -118,6 +118,9 @@ export default {
 					]},
 					{name:'用户管理',url:'userManage',iconName:'el-icon-user-solid',privileges:[]},
 
+					{name:'Dairy管理',url:'',iconName:'el-icon-notebook-1',privileges:[
+                        {name:'dairy列表',url:'dairyManage',privileges:[]},
+                    ]},
 
 
 				]

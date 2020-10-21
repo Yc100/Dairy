@@ -1,7 +1,6 @@
 import res from 'service/ajax'
 
-//获取用户信息
-export const getUserlistPage = (data) => res('get', 'apiNomal', '/user/listPage', data)
+
 /*
   文件上传
 */
@@ -16,9 +15,14 @@ export const GetUserInfo = (params) => res('get', 'apiNomal', '/api/getUserInfo'
 //上传用户头像
 export const updateHeadUrl = (data) => res('post', 'apiNomal', '/api/updateHeadUrl', data)
 
+/*==================================================================================================================*/
+//获取用户信息
+export const getUserlistPage = (data) => res('get', 'apiNomal', '/user/listPage', data)
 export const createUser = (data) => res('post', 'apiNomal', '/user/create', data)
 export const deleteUser = (data) => res('post', 'apiNomal', '/user/delete', data)
-
+export const getDairyList = (data) => res('get', 'apiNomal', '/manage/dairy/listPage', data)
+export const getDairyDetail = (data) => res('get', 'apiNomal', '/manage/dairy/getOne', data)
+/*==================================================================================================================*/
 
 
 // 消息中心

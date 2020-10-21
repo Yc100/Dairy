@@ -14,6 +14,7 @@ import store from 'vuexStore/store.js'  //引用vuex
 
 import epidemicStation from './modules/epidemicStation.js'  // 防疫站
 import userManage from './modules/userManage'
+import dairyManage from './modules/dairyManage'
 
 // 主页
 const index = resolve => require(['views/dairy/page/index.vue'], resolve)
@@ -24,6 +25,7 @@ const index = resolve => require(['views/dairy/page/index.vue'], resolve)
 let route=[
   ...epidemicStation,
   ...userManage,
+  ...dairyManage,
 ]
 
 
