@@ -50,6 +50,10 @@ public class UserController extends BasicController {
 		sysUserEntity.setCreator(getUser().getId());
 		sysUserEntity.setCreateDate(new Date());
 		sysUserEntity.setStatus(1);
+		sysUserEntity.setSuperAdmin(0);
+		if(!StringUtils.isNotEmpty(sysUserEntity.getHeadUrl())){
+			sysUserEntity.setHeadUrl("http://ec.aiyangniu.net/files/file/20201019/1603086392324.jpg");
+		}
 		sysUserService.saveUser(sysUserEntity);
 		return new Result().ok("用户创建成功");
 	}
@@ -72,6 +76,15 @@ public class UserController extends BasicController {
 		PageData<SysUserEntity> page = sysUserService.getListPage(params);
 
 		return new Result<PageData<SysUserEntity>>().ok(page);
+	}
+
+	@PostMapping("/delete")
+	public Result deleteUser(@RequestBody Map<String,Long> params){
+		SysUserEntity sysUserEntity = new SysUserEntity();
+		sysUserEntity.setId(params.get("userId"));
+		sysUserEntity.setDeleted("1");
+		sysUserService.updateById(sysUserEntity);
+		return new Result().ok("删除成功");
 	}
 
 

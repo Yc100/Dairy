@@ -68,4 +68,7 @@ public class SysUserEntity extends BaseEntity {
 	@TableField(fill = FieldFill.INSERT_UPDATE)
 	private Date updateDate;
 
+	private String deleted;
+
+
 }

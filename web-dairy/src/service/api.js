@@ -16,6 +16,9 @@ export const GetUserInfo = (params) => res('get', 'apiNomal', '/api/getUserInfo'
 //上传用户头像
 export const updateHeadUrl = (data) => res('post', 'apiNomal', '/api/updateHeadUrl', data)
 
+export const createUser = (data) => res('post', 'apiNomal', '/user/create', data)
+export const deleteUser = (data) => res('post', 'apiNomal', '/user/delete', data)
+
 
 
 // 消息中心
