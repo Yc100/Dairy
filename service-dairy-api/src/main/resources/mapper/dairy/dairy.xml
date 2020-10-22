@@ -11,4 +11,20 @@
 			AND title LIKE CONCAT('%', #{title}, '%')
 		</if>
 	</select>
+
+	<select id="getReadCountByDairyId" parameterType="java.lang.Long" resultType="java.math.BigDecimal">
+		select IFNULL(sum(read_count),0) as readCount from dairy_read where dairy_id=1
+	</select>
+
+	<select id="getReadCount" resultType="java.lang.Long">
+		select count(*) from dairy_read where dairy_id=1 and user_id=1
+	</select>
+
+	<insert id="saveDairyRead" parameterType="com.yc.common.entity.dairy.DairyReadEntity">
+		insert into dairy_read (read_count,dairy_id,user_id,create_date)VALUE(#{readCount},#{dairyId},#{userId},now())
+	</insert>
+
+	<update id="dairyReadCountAdd" parameterType="com.yc.common.entity.dairy.DairyReadEntity">
+		update dairy_read set read_count=read_count+#{readCount} where dairy_id=#{dairyId} and user_id=#{userId}
+	</update>
 </mapper>

@@ -22,6 +22,7 @@ export const createUser = (data) => res('post', 'apiNomal', '/user/create', data
 export const deleteUser = (data) => res('post', 'apiNomal', '/user/delete', data)
 export const getDairyList = (data) => res('get', 'apiNomal', '/manage/dairy/listPage', data)
 export const getDairyDetail = (data) => res('get', 'apiNomal', '/manage/dairy/getOne', data)
+export const readDairy = (data) => res('post', 'apiNomal', '/manage/dairy/readDairy', data)
 /*==================================================================================================================*/
 
 

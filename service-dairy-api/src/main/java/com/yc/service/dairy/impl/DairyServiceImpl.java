@@ -7,6 +7,7 @@ package com.yc.service.dairy.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.yc.common.entity.dairy.DairyEntity;
+import com.yc.common.entity.dairy.DairyReadEntity;
 import com.yc.common.entity.sys.SysUserEntity;
 import com.yc.common.page.PageData;
 import com.yc.common.service.impl.BaseServiceImpl;
@@ -17,6 +18,7 @@ import com.yc.service.security.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +44,26 @@ public class DairyServiceImpl extends BaseServiceImpl<DairyDao, DairyEntity> imp
         List<DairyEntity> dairyEntities = baseDao.getListPage(params);
 
         return getPageData(dairyEntities, page.getTotal(), DairyEntity.class);
+    }
+
+    @Override
+    public BigDecimal getReadCountByDairyId(Long dairyId) {
+        return dairyDao.getReadCountByDairyId(dairyId);
+    }
+
+    @Override
+    public Long getReadCount(Long dairyId, Long userId) {
+        return dairyDao.getReadCount(dairyId,userId);
+    }
+
+    @Override
+    public void saveDairyRead(DairyReadEntity dairyReadEntity) {
+        dairyDao.saveDairyRead(dairyReadEntity);
+    }
+
+    @Override
+    public void dairyReadCountAdd(DairyReadEntity dairyReadEntity) {
+        dairyDao.dairyReadCountAdd(dairyReadEntity);
     }
 
 }

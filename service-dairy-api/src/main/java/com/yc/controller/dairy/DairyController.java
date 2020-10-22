@@ -6,6 +6,7 @@ package com.yc.controller.dairy;
 
 import com.yc.common.constant.Constant;
 import com.yc.common.entity.dairy.DairyEntity;
+import com.yc.common.entity.dairy.DairyReadEntity;
 import com.yc.common.entity.sys.SysUserEntity;
 import com.yc.common.exception.ApplicationException;
 import com.yc.common.page.PageData;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Map;
 
@@ -40,6 +42,8 @@ public class DairyController extends BasicController {
 	@Autowired
 	private DairyService dairyService;
 
+	@Autowired
+	private SysUserService sysUserService;
 
 	@ApiOperation(value = "所有dairy列表",notes = "")
 	@ApiImplicitParams({
@@ -69,10 +73,34 @@ public class DairyController extends BasicController {
 	public Result<DairyEntity> getOne(@RequestParam(value = "dairyId") long dairyId) {
 
 		DairyEntity dairyEntity = dairyService.selectById(dairyId);
-
+		SysUserEntity sysUserEntity = sysUserService.getUserInfo(dairyEntity.getUserId());
+		dairyEntity.setSysUserEntity(sysUserEntity);
+		dairyEntity.setReadCount(dairyService.getReadCountByDairyId(dairyId));
 		return new Result<DairyEntity>().ok(dairyEntity);
 	}
 
+
+
+	@ApiOperation(value = "readDairy",notes = "")
+	@PostMapping("/readDairy")
+	public Result readDairy(@RequestBody Map<String,Long> param){
+		Long dairyId = param.get("dairyId");
+		Long userId = getUser().getId();
+
+		Long readCountNum = dairyService.getReadCount(dairyId,userId);
+
+		DairyReadEntity dairyReadEntity = new DairyReadEntity();
+		dairyReadEntity.setReadCount(BigDecimal.ONE);
+		dairyReadEntity.setDairyId(dairyId);
+		dairyReadEntity.setUserId(userId);
+		if(readCountNum>0){//修改
+			dairyService.dairyReadCountAdd(dairyReadEntity);
+		}else{//新增
+			dairyService.saveDairyRead(dairyReadEntity);
+		}
+
+		return new Result().ok("成功");
+	}
 
 
 }

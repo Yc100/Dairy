@@ -8,9 +8,11 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.yc.common.entity.BaseEntity;
+import com.yc.common.entity.sys.SysUserEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -43,5 +45,11 @@ public class DairyEntity extends BaseEntity {
 
 	@TableField(exist = false)
 	private String headUrl;
+
+	@TableField(exist = false)
+	private SysUserEntity sysUserEntity;
+
+	@TableField(exist = false)
+	private BigDecimal readCount;
 
 }
