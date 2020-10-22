@@ -14,12 +14,15 @@
 					<div v-for="(list,index) in menu" :key="list.id" :class="{hideMenuList: !isShowMenu}" class="div-menu-wrapper">
 
 						<!-- 单级菜单 -->
-					  	<MenuItem  v-if="isArray(list.privileges) && !(list.privileges.length)" :name="index+'-'+list.url" :to="list.url">
+					  	<MenuItem  v-if="isArray(list.privileges) && !(list.privileges.length) && list.admin==0" :name="index+'-'+list.url" :to="list.url">
+							<i :class="'iconfont'+' '+list.iconName"></i>{{list.name}}
+						</MenuItem>
+					  	<MenuItem  v-else-if="isArray(list.privileges) && !(list.privileges.length) && list.admin==1 && userInfo.superAdmin==1 " :name="index+'-'+list.url" :to="list.url">
 							<i :class="'iconfont'+' '+list.iconName"></i>{{list.name}}
 						</MenuItem>
 
 						<!-- 多级菜单 -->
-						<Submenu v-if="isArray(list.privileges) && (list.privileges.length)" :name="index+'-'+list.url">    <!-- 一级菜单-->
+						<Submenu v-if="isArray(list.privileges) && (list.privileges.length) && list.admin==0" :name="index+'-'+list.url">    <!-- 一级菜单-->
 							<template slot="title">
 								<i :class="'iconfont'+' '+list.iconName"></i>{{list.name}}
 							</template>
@@ -27,7 +30,15 @@
 								<i class="iconfont"></i> {{child.name}}
 							</MenuItem>
 						</Submenu>
-								
+						<Submenu v-else-if="isArray(list.privileges) && (list.privileges.length) && list.admin==1 && userInfo.superAdmin==1" :name="index+'-'+list.url">    <!-- 管理员一级菜单-->
+							<template slot="title">
+								<i :class="'iconfont'+' '+list.iconName"></i>{{list.name}}
+							</template>
+							<MenuItem v-for="(child,childIndex) in list.privileges" :key="child.id" :name="childIndex+'-'+child.url">   <!--管理员 二级菜单-->
+								<i class="iconfont"></i> {{child.name}}
+							</MenuItem>
+						</Submenu>
+
 					</div>
 				</Menu>
 
@@ -114,13 +125,13 @@ export default {
 					]},*/
 					// =========防疫站========
 					{name:'个人管理',url:'',iconName:'icongeren',privileges:[
-						{name:'个人信息',url:'epidemicInfo',privileges:[]},
-					]},
-					{name:'用户管理',url:'userManage',iconName:'el-icon-user-solid',privileges:[]},
+						{name:'个人信息',url:'epidemicInfo',privileges:[],admin:0},
+					],admin:0},
+					{name:'用户管理',url:'userManage',iconName:'el-icon-user-solid',privileges:[],admin:1},
 
 					{name:'Dairy管理',url:'',iconName:'el-icon-notebook-1',privileges:[
-                        {name:'dairy列表',url:'dairyManage',privileges:[]},
-                    ]},
+                        {name:'dairy列表',url:'dairyManage',privileges:[],admin:0},
+                    ],admin:0},
 
 
 				]

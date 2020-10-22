@@ -7,6 +7,9 @@
 		select d.*,u.nick_name as nickName,u.head_url as headUrl
 		from dairy d left join sys_user u on d.user_id=u.id
 		where 1=1 and d.deleted='0'
+		<if test="superAdmin==0">
+			and d.user_id=#{userId}
+		</if>
 		<if test="title != null and title != ''">
 			AND title LIKE CONCAT('%', #{title}, '%')
 		</if>
@@ -17,7 +20,7 @@
 	</select>
 
 	<select id="getReadCount" resultType="java.lang.Long">
-		select count(*) from dairy_read where dairy_id=1 and user_id=1
+		select count(*) from dairy_read where dairy_id=#{dairyId} and user_id=#{userId}
 	</select>
 
 	<insert id="saveDairyRead" parameterType="com.yc.common.entity.dairy.DairyReadEntity">

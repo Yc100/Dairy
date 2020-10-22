@@ -9,6 +9,7 @@ import com.yc.common.entity.dairy.DairyEntity;
 import com.yc.common.entity.dairy.DairyReadEntity;
 import com.yc.common.entity.sys.SysUserEntity;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -27,7 +28,7 @@ public interface DairyDao extends BaseDao<DairyEntity> {
 
 	BigDecimal getReadCountByDairyId(Long dairyId);
 
-	Long getReadCount(Long dairyId, Long userId);
+	Long getReadCount(@Param("dairyId") Long dairyId, @Param("userId") Long userId);
 
 	void saveDairyRead(DairyReadEntity dairyReadEntity);
 

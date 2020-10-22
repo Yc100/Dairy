@@ -56,6 +56,9 @@ public class DairyController extends BasicController {
 	@GetMapping("/listPage")
 	public Result<PageData<DairyEntity>> listPage(@ApiIgnore @RequestParam Map<String, Object> params) {
 
+		SysUserEntity user = getUser();
+		params.put("superAdmin",user.getSuperAdmin());
+		params.put("userId",user.getId());
 		Integer offset = Integer.valueOf(params.get(Constant.OFFSET).toString());
 		Integer limit = Integer.valueOf(params.get(Constant.LIMIT).toString());
 		Integer pageNo = offset / (limit<=0 ? 1 : limit) + 1;
