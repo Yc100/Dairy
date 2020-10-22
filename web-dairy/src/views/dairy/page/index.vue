@@ -66,10 +66,11 @@ import {mapGetters,mapActions} from 'vuex'
 // import { manager,org } from 'service/api'
 import headerNav from 'components/nav/headerNav'
 import vTags from 'components/nav/Tags.vue'
+import Ueditor from 'components/editor/Ueditor.vue'
 export default {
 	name: 'index',
 	components: {
-		headerNav,vTags
+		headerNav,vTags,Ueditor
 	},
 	data() {
 		return {
@@ -130,7 +131,8 @@ export default {
 					{name:'用户管理',url:'userManage',iconName:'el-icon-user-solid',privileges:[],admin:1},
 
 					{name:'Dairy管理',url:'',iconName:'el-icon-notebook-1',privileges:[
-                        {name:'dairy列表',url:'dairyManage',privileges:[],admin:0},
+                        {name:'WriteDairy',url:'writeDairy',privileges:[],admin:0},
+                        {name:'Dairy列表',url:'dairyManage',privileges:[],admin:0},
                     ],admin:0},
 
 

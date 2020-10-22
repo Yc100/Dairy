@@ -4,6 +4,7 @@
 
 const dairyManage = resolve => require(['views/dairy/dairyManage/dairyManage.vue'], resolve)
 const dairyDetail = resolve => require(['views/dairy/dairyManage/dairyDetail.vue'], resolve)
+const writeDairy = resolve => require(['views/dairy/dairyManage/writeDairy.vue'], resolve)
 
 
 
@@ -27,6 +28,14 @@ const routes =  [
         path: '/dairyDetail',
         component:dairyDetail,
         name:'dairy详情',
+        meta: {
+            loggedIn: true //登录验证
+        },
+    },
+    {
+        path: '/writeDairy',
+        component:writeDairy,
+        name:'writeDairy',
         meta: {
             loggedIn: true //登录验证
         },
