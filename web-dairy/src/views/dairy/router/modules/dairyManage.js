@@ -5,6 +5,7 @@
 const dairyManage = resolve => require(['views/dairy/dairyManage/dairyManage.vue'], resolve)
 const dairyDetail = resolve => require(['views/dairy/dairyManage/dairyDetail.vue'], resolve)
 const writeDairy = resolve => require(['views/dairy/dairyManage/writeDairy.vue'], resolve)
+const nettyTest = resolve => require(['views/dairy/dairyManage/nettyTest.vue'], resolve)
 
 
 
@@ -36,6 +37,14 @@ const routes =  [
         path: '/writeDairy',
         component:writeDairy,
         name:'writeDairy',
+        meta: {
+            loggedIn: true //登录验证
+        },
+    },
+    {
+        path: '/nettyTest',
+        component:nettyTest,
+        name:'nettyTest',
         meta: {
             loggedIn: true //登录验证
         },

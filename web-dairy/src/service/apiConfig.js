@@ -7,15 +7,15 @@ let env = process.env.NODE_ENV
 let api
 if (env === 'development') {  //开发环境
   api = {
-    apiNomal : 'http://localhost:8081'
+    apiNomal : 'http://172.168.1.177:8081'
   }
 } else if (env === 'testing') {
   api = {
-    apiNomal : 'http://localhost:8081'
+    apiNomal : 'http://172.168.1.177:8081'
   }
 } else { //生产环境
     api = {
-      apiNomal : 'http://localhost:8081'
+      apiNomal : 'http://172.168.1.177:8081'
       
     }
 }

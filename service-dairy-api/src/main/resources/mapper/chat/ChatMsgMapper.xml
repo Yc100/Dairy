@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yc.dao.chat.ChatMsgDao">
+
+	<insert id="saveMsg" parameterType="com.yc.common.entity.chat.ChatMsg" keyProperty="id" useGeneratedKeys="true">
+		  insert into chat_msg(send_user_id,accept_user_id,msg,sign_flag,create_time)VALUES (
+		  	#{sendUserId},
+		  	#{acceptUserId},
+		  	#{msg},
+		  	#{signFlag},
+		  	#{createTime}
+		  )
+	</insert>
+
+	<update id="updateMsgSigned">
+		update chat_msg set sign_flag=1
+		where id in
+		<foreach collection="msgIds" item="item" index="index" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+
+	<select id="getOneFriend" resultType="java.util.Map">
+		select friend_user_id as friendId,u.username as userName from friend f left join sys_user u on f.friend_user_id=u.id where user_id=#{userId}
+	</select>
+</mapper>
