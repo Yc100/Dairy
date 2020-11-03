@@ -11,6 +11,8 @@ import com.yc.common.entity.sys.SysUserEntity;
 import com.yc.common.page.PageData;
 import com.yc.common.utils.Result;
 import com.yc.controller.BasicController;
+import com.yc.dto.ChatFriendDto;
+import com.yc.dto.ChatMsgDto;
 import com.yc.service.chat.ChatMsgService;
 import com.yc.service.dairy.DairyService;
 import com.yc.service.security.SysUserService;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -41,13 +44,22 @@ public class ChatController extends BasicController {
 
 
 	@ApiOperation(value = "getOne",notes = "")
-	/*@ApiImplicitParams({
-			@ApiImplicitParam(name = "dairyId", value = "dairyId", paramType = "query", dataType="long")
-	})*/
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "friendId", value = "friendId", paramType = "query", dataType="long")
+	})
 	@GetMapping("/getOneFriend")
-	public Result<DairyEntity> getOne() {
-		Map<String,Object> friendData = chatMsgService.getOneFriend(getUserId());
-		return new Result().ok(friendData);
+	public Result getOne(@RequestParam(value = "friendId") Long friendId) {
+		ChatFriendDto chatFriendDto = chatMsgService.getOneFriend(getUserId(),friendId);
+		return new Result().ok(chatFriendDto);
+	}
+
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "friendId", value = "friendId", paramType = "query", dataType="long")
+	})
+	@GetMapping("/getFriendMsgHistoryList")
+	public Result getFriendMsgHistoryList(@RequestParam(value = "friendId") Long friendId) {
+		List<ChatMsgDto> chatMsgDtoList = chatMsgService.getFriendMsgHistoryList(getUserId(),friendId);
+		return new Result().ok(chatMsgDtoList);
 	}
 
 

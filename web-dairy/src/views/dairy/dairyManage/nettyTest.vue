@@ -1,7 +1,7 @@
 <template>
   <div class="dairyManage">
-    <el-input type="textarea" placeholder="请输入内容" v-model="textarea"></el-input>
-    <el-button type="success" @click="senMsg()">发送</el-button>
+    <el-input type="textarea" placeholder="请输入内容" v-model="textarea" @keyup.enter.native="senMsg()"></el-input>
+    <el-button type="success" @click="senMsg()" >发送</el-button>
 
     <div v-for="(list,index) in msgList">
       <P>{{list}}</P>
@@ -51,7 +51,8 @@ export default {
     ...mapActions([]),
 
     initWebSocket() {
-      this.webSocket = new WebSocket("ws://172.168.1.177:8088/ws");
+      //this.webSocket = new WebSocket("ws://172.168.1.177:8088/ws");
+      this.webSocket = new WebSocket("ws://localhost:8088/ws");
       this.webSocket.onopen = this.webSocketHandleOpen;
       this.webSocket.onerror = this.webSocketHandleError;
       this.webSocket.onmessage = this.webSocketHandleMessage;
@@ -79,7 +80,7 @@ export default {
           if (res.code == 0) {
             //检测是否登录成功
             this.friend.friendId = res.data.friendId;
-            this.friend.name = res.data.userName;
+            this.friend.name = res.data.nickName;
           } else {
             this.$Message.error(err.msg);
           }
@@ -91,7 +92,6 @@ export default {
     },
 
     senMsg() {
-      console.log("我要看账号的信息", this.userInfo.id);
       this.dataContent.action = 2;
       this.dataContent.chatMsg.senderId = this.userInfo.id;
       this.dataContent.chatMsg.receiverId = this.friend.friendId;

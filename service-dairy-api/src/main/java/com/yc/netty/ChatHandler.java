@@ -112,7 +112,26 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
         }else if (action == MsgActionEnum.KEEPALIVE.type){
             //2.4、心跳类型的消息
             //2.4 心跳类型的消息
-            System.out.println("收到来自channel 为【"+channel+"】的心跳包");
+            //System.out.println("收到来自channel 为【"+channel+"】的心跳包");
+            String friendId = dataContent.getExtAnd();
+            Channel receiveChannel = UserChannelRel.get(Long.valueOf(friendId));
+            Channel findChannel ;
+            if(receiveChannel !=null ){
+                findChannel = users.find(receiveChannel.id());
+            }else{
+                findChannel =null;
+            }
+
+            DataContent dataContentPing = new DataContent();
+
+            if(findChannel == null){//离线
+                dataContentPing.setExtAnd("0");//离线
+                System.out.println("收到来自channel 为【"+channel+"】的心跳包"+"[对方离线]");
+            }else{//在线
+                dataContentPing.setExtAnd("1");//在线
+                System.out.println("收到来自channel 为【"+channel+"】的心跳包"+"[对方在线]");
+            }
+            channel.writeAndFlush( new TextWebSocketFrame(JsonUtils.objectToJson(dataContentPing)));
         }
 
 

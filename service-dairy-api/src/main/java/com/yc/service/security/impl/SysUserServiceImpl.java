@@ -58,4 +58,14 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
         return getPageData(sysUserEntityList, page.getTotal(), SysUserEntity.class);
     }
 
+    @Override
+    public PageData<SysUserEntity> myFocusListPage(Map<String, Object> params) {
+        //分页
+        IPage page = getPage(params, "create_date", false);
+
+        List<SysUserEntity> sysUserEntityList = baseDao.myFocusListPage(params);
+
+        return getPageData(sysUserEntityList, page.getTotal(), SysUserEntity.class);
+    }
+
 }

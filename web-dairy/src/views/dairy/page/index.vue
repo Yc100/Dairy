@@ -134,7 +134,9 @@ export default {
                         {name:'WriteDairy',url:'writeDairy',privileges:[],admin:0},
                         {name:'Dairy列表',url:'dairyManage',privileges:[],admin:0},
 					],admin:0},
-					{name:'netty测试',url:'nettyTest',iconName:'el-icon-user-solid',privileges:[],admin:0},
+					//{name:'netty测试',url:'nettyTest',iconName:'el-icon-user-solid',privileges:[],admin:0},
+					{name:'我的关注',url:'myFocu',iconName:'el-icon-user-solid',privileges:[],admin:0},
+					//{name:'私信',url:'privateLetter',iconName:'el-icon-user-solid',privileges:[],admin:0},
 
 
 				]

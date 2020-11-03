@@ -30,5 +30,7 @@ public interface SysUserDao extends BaseDao<SysUserEntity> {
 
 	List<SysUserEntity> getListPage(Map<String,Object> params);
 
+	List<SysUserEntity> myFocusListPage(Map<String,Object> params);
+
 
 }

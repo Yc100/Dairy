@@ -31,4 +31,6 @@ public interface SysUserService extends BaseService<SysUserEntity> {
 
 	PageData<SysUserEntity>getListPage(Map<String,Object> params);
 
+	PageData<SysUserEntity>myFocusListPage(Map<String,Object> params);
+
 }

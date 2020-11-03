@@ -29,7 +29,9 @@ export const readDairy = (data) => res('post', 'apiNomal', '/manage/dairy/readDa
 
 
 /*==================================================================================================================*/
+export const getMyFocusList = (data) => res('get', 'apiNomal', '/user/myFocusListPage', data)
 export const getOneFriendId = (data) => res('get', 'apiNomal', '/dairy/chat/getOneFriend', data)
+export const getFriendMsgHistoryList = (data) => res('get', 'apiNomal', '/dairy/chat/getFriendMsgHistoryList', data)
 
 /*==================================================================================================================*/
 

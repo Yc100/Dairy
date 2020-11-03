@@ -6,6 +6,8 @@ const dairyManage = resolve => require(['views/dairy/dairyManage/dairyManage.vue
 const dairyDetail = resolve => require(['views/dairy/dairyManage/dairyDetail.vue'], resolve)
 const writeDairy = resolve => require(['views/dairy/dairyManage/writeDairy.vue'], resolve)
 const nettyTest = resolve => require(['views/dairy/dairyManage/nettyTest.vue'], resolve)
+const privateLetter = resolve => require(['views/dairy/dairyManage/privateLetter.vue'], resolve)
+const myFocu = resolve => require(['views/dairy/dairyManage/myFocu.vue'], resolve)
 
 
 
@@ -49,6 +51,23 @@ const routes =  [
             loggedIn: true //登录验证
         },
     },
+    {
+        path: '/privateLetter',
+        component:privateLetter,
+        name:'privateLetter',
+        meta: {
+            loggedIn: true //登录验证
+        },
+    },
+    {
+        path: '/myFocu',
+        component:myFocu,
+        name:'myFocu',
+        meta: {
+            loggedIn: true //登录验证
+        },
+    },
+
 
   ]
 

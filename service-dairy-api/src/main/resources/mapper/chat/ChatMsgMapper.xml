@@ -21,7 +21,61 @@
 		</foreach>
 	</update>
 
-	<select id="getOneFriend" resultType="java.util.Map">
-		select friend_user_id as friendId,u.username as userName from friend f left join sys_user u on f.friend_user_id=u.id where user_id=#{userId}
+	<select id="getOneFriend" resultType="com.yc.dto.ChatFriendDto">
+		select id as friendId,u.nick_name as name,u.head_url as img from  sys_user u  where id=#{friendId}
+	</select>
+
+	<select id="getFriendMsgList" resultType="com.yc.dto.ChatMsgDto">
+		select
+		m.send_user_id,
+		m.accept_user_id,
+		DATE_FORMAT(m.create_time,'%Y-%m-%d %H:%i:%S') as date,
+		m.msg as textMsg,
+		u.nick_name as name,
+		u.head_url as img,
+		case m.send_user_id
+		WHEN #{userId} then 1
+		ELSE 0
+		end as mine
+
+		FROM
+			chat_msg m left join sys_user u on m.send_user_id=u.id
+		where m.id in
+		(select t. id from
+		(
+		select *
+		FROM
+			chat_msg m
+		WHERE
+			m.send_user_id IN (#{userId}, #{friendId})
+		AND m.accept_user_id IN (#{userId}, #{friendId})
+		ORDER BY
+			m.create_time desc limit 4
+		) as t
+		)
+		ORDER BY
+			m.create_time
+
+	</select>
+
+	<select id="getFriendMsgHistoryList" resultType="com.yc.dto.ChatMsgDto">
+		select
+		m.send_user_id,
+		m.accept_user_id,
+		DATE_FORMAT(m.create_time,'%Y-%m-%d %H:%i:%S') as date,
+		m.msg as textMsg,
+		u.nick_name as name,
+		u.head_url as img,
+		case m.send_user_id
+		WHEN #{userId} then 1
+		ELSE 0
+		end as mine
+		FROM
+		   chat_msg m left join sys_user u on m.send_user_id=u.id
+		WHERE
+		   m.send_user_id IN (#{userId}, #{friendId})
+		AND m.accept_user_id IN (#{userId}, #{friendId})
+		ORDER BY
+		   m.create_time
 	</select>
 </mapper>

@@ -21,4 +21,9 @@
 			AND nick_name LIKE CONCAT('%', #{nickName}, '%')
 		</if>
 	</select>
+
+
+	<select id="myFocusListPage" resultType="com.yc.common.entity.sys.SysUserEntity">
+		select u.nick_name,u.head_url,u.id from friend f LEFT JOIN sys_user u on f.friend_user_id=u.id where user_id=#{userId}
+	</select>
 </mapper>

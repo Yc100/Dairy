@@ -41,6 +41,8 @@ import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
 Vue.use(ViewUI);
 
+import Chat from 'jwchat';
+Vue.use(Chat)
 
 import 'animate.css' //css3动效
 

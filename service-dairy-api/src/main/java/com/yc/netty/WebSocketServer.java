@@ -36,8 +36,9 @@ public class WebSocketServer {
 
     public void start() {
         try {
-            //this.future = server.bind("127.0.0.1",8088).sync();
-            this.future = server.bind("172.168.1.177",8088);
+            this.future = server.bind("127.0.0.1",8088).sync();
+            //this.future = server.bind("172.168.1.177",8088);
+            //this.future = server.bind("localhost",8088);
             Thread.sleep(1000);
             while (!this.future.isSuccess()){
                 log.info("Netty 连接失败 !!!");

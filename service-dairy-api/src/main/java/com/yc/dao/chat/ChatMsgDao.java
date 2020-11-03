@@ -7,6 +7,8 @@ package com.yc.dao.chat;
 import com.yc.common.dao.BaseDao;
 import com.yc.common.entity.chat.ChatMsg;
 import com.yc.common.entity.sys.SysUserEntity;
+import com.yc.dto.ChatFriendDto;
+import com.yc.dto.ChatMsgDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -25,6 +27,10 @@ public interface ChatMsgDao extends BaseDao<ChatMsg> {
 
 	void updateMsgSigned(@Param("msgIds") List<Long> msgIds);
 
-	Map<String,Object> getOneFriend(@Param("userId") Long userId);
+	ChatFriendDto getOneFriend(@Param("friendId") Long friendId);
+
+	List<ChatMsgDto> getFriendMsgList(@Param("userId") Long userId,@Param("friendId") Long friendId);
+
+	List<ChatMsgDto> getFriendMsgHistoryList(@Param("userId") Long userId,@Param("friendId") Long friendId);
 
 }

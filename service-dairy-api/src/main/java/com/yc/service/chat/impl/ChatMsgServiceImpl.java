@@ -13,6 +13,8 @@ import com.yc.common.page.PageData;
 import com.yc.common.service.impl.BaseServiceImpl;
 import com.yc.dao.chat.ChatMsgDao;
 import com.yc.dao.security.SysUserDao;
+import com.yc.dto.ChatFriendDto;
+import com.yc.dto.ChatMsgDto;
 import com.yc.netty.ChatMsg;
 import com.yc.service.chat.ChatMsgService;
 import com.yc.service.security.SysUserService;
@@ -21,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -54,7 +57,41 @@ public class ChatMsgServiceImpl extends BaseServiceImpl<ChatMsgDao, com.yc.commo
     }
 
     @Override
-    public Map<String, Object> getOneFriend(Long userId) {
-        return chatMsgDao.getOneFriend(userId);
+    public ChatFriendDto getOneFriend(Long userId,Long friendId) {
+        //
+        //
+        /**
+         * img: '/image/cover.png',
+         * name: 'yc',
+         * friendId,
+         * [
+         *  date
+         *  text,
+         *  mine,
+         *  name,
+         *  img
+         * ]
+         * */
+        ChatFriendDto chatFriendDto = chatMsgDao.getOneFriend(friendId);
+        List<ChatMsgDto> chatMsgDaoList = chatMsgDao.getFriendMsgList(userId,friendId);
+        chatMsgDaoList.forEach(x->{
+           Map<String,Object> textMap = new HashMap<String,Object>();
+           textMap.put("text",x.getTextMsg());
+           x.setText(textMap);
+        });
+        chatFriendDto.setChatMsgDtoList(chatMsgDaoList);
+
+        return chatFriendDto;
+    }
+
+    @Override
+    public List<ChatMsgDto> getFriendMsgHistoryList(Long userId, Long friendId) {
+       List<ChatMsgDto> chatMsgDaoList = chatMsgDao.getFriendMsgHistoryList(userId,friendId);
+        chatMsgDaoList.forEach(x->{
+            Map<String,Object> textMap = new HashMap<String,Object>();
+            textMap.put("text",x.getTextMsg());
+            x.setText(textMap);
+        });
+        return chatMsgDaoList;
     }
 }

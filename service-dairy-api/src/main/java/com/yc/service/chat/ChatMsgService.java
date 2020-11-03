@@ -7,6 +7,8 @@ package com.yc.service.chat;
 import com.yc.common.entity.sys.SysUserEntity;
 import com.yc.common.page.PageData;
 import com.yc.common.service.BaseService;
+import com.yc.dto.ChatFriendDto;
+import com.yc.dto.ChatMsgDto;
 import com.yc.netty.ChatMsg;
 
 import java.util.List;
@@ -25,6 +27,7 @@ public interface ChatMsgService extends BaseService<com.yc.common.entity.chat.Ch
 
 	void updateMsgSigned(List<Long> msgIds);
 
-	Map<String,Object> getOneFriend(Long userId);
+	ChatFriendDto getOneFriend(Long userId,Long friendId);
+	List<ChatMsgDto>  getFriendMsgHistoryList(Long userId, Long friendId);
 
 }
