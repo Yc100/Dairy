@@ -16,7 +16,7 @@
 	</select>
 
 	<select id="getReadCountByDairyId" parameterType="java.lang.Long" resultType="java.math.BigDecimal">
-		select IFNULL(sum(read_count),0) as readCount from dairy_read where dairy_id=1
+		select IFNULL(sum(read_count),0) as readCount from dairy_read where dairy_id=#{dairyId}
 	</select>
 
 	<select id="getReadCount" resultType="java.lang.Long">

@@ -122,6 +122,8 @@ public interface Constant {
      */
     String MAIL_CONFIG_KEY = "MAIL_CONFIG_KEY";
 
+    String appKey = "98110EA0D210A3CFF124FFEA12AE5DF2";
+
     /**
      * 定时任务状态
      */

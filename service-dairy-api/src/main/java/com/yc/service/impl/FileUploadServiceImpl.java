@@ -51,7 +51,7 @@ public class FileUploadServiceImpl implements FileUploadService {
         // 通过静态资源映射 d:/upload/ 会映射到http://项目地址/files 路径下
         // 静态资源映射见bqinfo.project.common.config.WebConfigurer.java文件
         // File dest = new File(ConstantL.IMAGE_UPDATE_PATH + fileName);
-        File dest = new File(uploadPath + "file/" + DateUtils.getCurrentDateByFormat("yyyyMMdd") + "/" + fileName);
+        File dest = new File(uploadPath + "" + DateUtils.getCurrentDateByFormat("yyyyMMdd") + "/" + fileName);
         dest.setWritable(true, false);
         // 检测是否存在目录
         if (!dest.getParentFile().exists()) {
@@ -66,7 +66,9 @@ public class FileUploadServiceImpl implements FileUploadService {
                     "\"url\": \"" + "/files/file/" + DateUtils.getCurrentDateByFormat("yyyyMMdd") + "/" + fileName + "\"," +
                     "\"title\": \"" + fileName + "\"," +
                     "\"original\": \"" + originalFileName + "\"}";
-            return "/files/file/" + DateUtils.getCurrentDateByFormat("yyyyMMdd") + "/" + fileName;
+            //return "D:\\file\\/" + DateUtils.getCurrentDateByFormat("yyyyMMdd") + "/" + fileName;
+            System.out.println(dest.getAbsolutePath());
+            return dest.getAbsolutePath();
         } catch (IllegalStateException e) {
 
             logger.error("上传文件失败 错误信息：" + e.getMessage());

@@ -57,7 +57,7 @@ public class DairyController extends BasicController {
 	public Result<PageData<DairyEntity>> listPage(@ApiIgnore @RequestParam Map<String, Object> params) {
 
 		SysUserEntity user = getUser();
-		params.put("superAdmin",user.getSuperAdmin());
+		params.put("superAdmin",user.getSuperAdmin()!=null?user.getSuperAdmin():0);
 		params.put("userId",user.getId());
 		Integer offset = Integer.valueOf(params.get(Constant.OFFSET).toString());
 		Integer limit = Integer.valueOf(params.get(Constant.LIMIT).toString());
@@ -103,6 +103,48 @@ public class DairyController extends BasicController {
 		}
 
 		return new Result().ok("成功");
+	}
+
+
+	@PostMapping("/saveDairy")
+	public Result saveDairy(@RequestBody DairyEntity dairyEntity){
+		if(ObjectUtils.isEmpty(dairyEntity)){
+			throw new ApplicationException("你这啥也没有啊！！！！兄弟");
+		}
+		if(ObjectUtils.isEmpty(dairyEntity.getTitle())){
+			throw new ApplicationException("不对啊 标题咋空了");
+		}
+		if(ObjectUtils.isEmpty(dairyEntity.getMainText())){
+			throw new ApplicationException("正文还能空？");
+		}
+
+		dairyEntity.setUserId(getUserId());
+		dairyEntity.setCreateDate(new Date());
+		dairyEntity.setDeleted("0");
+		this.dairyService.insert(dairyEntity);
+		return new Result().ok("保存成功");
+	}
+
+
+	@PutMapping("/updateDairy")
+	public Result updateDairy(@RequestBody DairyEntity dairyEntity){
+		if(ObjectUtils.isEmpty(dairyEntity)){
+			throw new ApplicationException("你这啥也没有啊！！！！兄弟");
+		}
+		if(ObjectUtils.isEmpty(dairyEntity.getId())){
+			throw new ApplicationException("不对啊 修改ID不能空啊大哥");
+		}
+		if(ObjectUtils.isEmpty(dairyEntity.getTitle())){
+			throw new ApplicationException("不对啊 标题咋空了");
+		}
+		if(ObjectUtils.isEmpty(dairyEntity.getMainText())){
+			throw new ApplicationException("正文还能空？");
+		}
+
+		dairyEntity.setUserId(getUserId());
+		dairyEntity.setUpdateDate(new Date());
+		this.dairyService.updateById(dairyEntity);
+		return new Result().ok("保存成功");
 	}
 
 

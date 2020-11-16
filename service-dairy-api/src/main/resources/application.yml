@@ -45,7 +45,8 @@ spring:
 ec:
   redis:
     open: false  # 是否开启redis缓存  true开启   false关闭
-  uploadPath: /opt/images/
+  #uploadPath: /opt/images/
+  uploadPath: D:\file\
 
 #mybatis
 mybatis-plus:

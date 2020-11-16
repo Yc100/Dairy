@@ -77,7 +77,6 @@ export default {
       );
     },
     saveDairy() {
-        debugger
       if (!this.title || this.title.trim() == "") {
         this.$Message["error"]({
           background: true,

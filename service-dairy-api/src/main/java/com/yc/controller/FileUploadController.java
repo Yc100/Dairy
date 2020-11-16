@@ -14,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
  * @author YC
  */
 @RestController
-@Authorization
 @RequestMapping("/file")
 @Api(tags = "文件上传")
 public class FileUploadController {
@@ -35,6 +34,6 @@ public class FileUploadController {
 		}
 
 		String fileUrl = fileUploadService.fileUpload(upfile);
-		return new Result<String>().message(fileUrl);
+		return new Result<String>().ok(fileUrl);
 	}
 }
