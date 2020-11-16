@@ -20,6 +20,9 @@ export const updateHeadUrl = (data) => res('post', 'apiNomal', '/api/updateHeadU
 export const getUserlistPage = (data) => res('get', 'apiNomal', '/user/listPage', data)
 export const createUser = (data) => res('post', 'apiNomal', '/user/create', data)
 export const deleteUser = (data) => res('post', 'apiNomal', '/user/delete', data)
+
+export const saveDairyUser = (data) => res('post', 'apiNomal', '/manage/dairy/saveDairy', data)
+export const updateDairyUser = (data) => res('put', 'apiNomal', '/manage/dairy/updateDairy', data)
 export const getDairyList = (data) => res('get', 'apiNomal', '/manage/dairy/listPage', data)
 export const getDairyDetail = (data) => res('get', 'apiNomal', '/manage/dairy/getOne', data)
 export const readDairy = (data) => res('post', 'apiNomal', '/manage/dairy/readDairy', data)

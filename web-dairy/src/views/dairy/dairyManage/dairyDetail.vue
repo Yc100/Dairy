@@ -146,9 +146,9 @@ export default {
 <style lang="less">
 
     .post-content-container{
-        img{
-            width: 100% !important;
-        }
+        // img{
+        //     width: 100% !important;
+        // }
         ul li{
             list-style-type: disc;
             margin: 8px 0 0 32px;

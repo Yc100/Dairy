@@ -37,7 +37,7 @@
 import { mapGetters, mapActions } from "vuex";
 import api from "service/apiConfig";
 import axios from "axios";
-import { getDairyDetail, readDairy, saveDairyUser } from "service/api";
+import { getDairyDetail, updateDairyUser } from "service/api";
 import Ueditor from "components/editor/Ueditor";
 export default {
   name: "writeDairy",
@@ -77,6 +77,7 @@ export default {
       );
     },
     saveDairy() {
+        debugger
       if (!this.title || this.title.trim() == "") {
         this.$Message["error"]({
           background: true,
@@ -99,12 +100,13 @@ export default {
       let dairy = {
         title: this.title,
         dairyDescribe: this.desc,
-        mainText: this.content
+        mainText: this.content,
+        id:this.dairyId
       };
-      this.saveDairyUser(dairy)
+      this.updateDairy(dairy)
     },
-    async saveDairyUser(data) {
-      await saveDairyUser(data)
+    async updateDairy(data) {
+      await updateDairyUser(data)
         .then(res => {
           //获取用户信息
           if (res.code == 0) {
@@ -129,10 +131,34 @@ export default {
     },
     goList(){
         this.$router.push({path: "/myDairyManage"});
-    }
+    },
+    async getDairyDetail(id){
+            await getDairyDetail({dairyId:id}).then((res) => { //获取用户信息
+                this.loading = false;
+                if(res.code == 0){ //检测是否登录成功
+                    this.tableData=res.data
+                    //this.readDairy(this.tableData.id)
+                    this.title=res.data.title
+                    this.desc=res.data.dairyDescribe
+                    this.content=res.data.mainText
+                    this.dairyId=res.data.id
+                    this.editorReadyInstance.setContent(_.cloneDeep(this.content));
+                    //console.log(this.content)
+                }else{
+                    this.$Message.error(err.msg);
+                }
+            }).catch(err=>{
+                this.loading = false;
+                this.$Message.error(err.msg);
+            })
+        },
   },
 
-  mounted() {},
+  mounted() {
+      this.dairyId=this.$route.query.dairyId
+      this.getDairyDetail(this.$route.query.dairyId)
+
+  },
 
   watch: {}
 };

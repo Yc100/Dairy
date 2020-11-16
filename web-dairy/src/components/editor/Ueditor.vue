@@ -9,7 +9,8 @@
 
 //主体文件引入
 import '../../../static/utf8-jsp/ueditor.config'
-import '../../../static/utf8-jsp/ueditor.all.min'
+//import '../../../static/utf8-jsp/ueditor.all.min'
+import '../../../static/utf8-jsp/ueditor.all'
 import '../../../static/utf8-jsp/lang/zh-cn/zh-cn'
 import api from 'service/apiConfig'
 
@@ -56,7 +57,9 @@ export default {
     let _bkGetActionUrl = UE.Editor.prototype.getActionUrl;
     UE.Editor.prototype.getActionUrl = function(action) {
       if (action == 'uploadimage') {
-        return api.apiItem + '/images/upload';
+        //return 'http://items.aiyangniu.net/images/upload';
+        return 'http://localhost:8081/file/upload';
+        //return  'https://hb9.api.yesapi.cn/?s=App.CDN.UploadImg&app_key=98110EA0D210A3CFF124FFEA12AE5DF2';
         // } else if (action == 'uploadvideo') {
         // return 'http://a.b.com/video.php';
       } else {

@@ -8243,7 +8243,7 @@ UE.ajax = function() {
         };
         if (method == "POST") {
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.setRequestHeader('X-AIYANGNIU-SIGNATURE', localStorage.token);
+            xhr.setRequestHeader('X-AIYANGNIU-SIGNATURE', localStorage.aynUserToken);
             xhr.send(submitStr);
         } else {
             xhr.send(null);
@@ -10012,16 +10012,16 @@ UE.plugins['defaultfilter'] = function () {
                             node.setAttr('_href', val)
                         }
                         break;
-                    case 'img':
-                        //todo base64暂时去掉，后边做远程图片上传后，干掉这个
-                        if (val = node.getAttr('src')) {
-                            if (/^data:/.test(val)) {
-                                node.parentNode.removeChild(node);
-                                break;
-                            }
-                        }
-                        node.setAttr('_src', node.getAttr('src'));
-                        break;
+                        case 'img':
+                            //todo base64暂时去掉，后边做远程图片上传后，干掉这个
+                            // if (val = node.getAttr('src')) {
+                            //     if (/^data:/.test(val)) {
+                            //         node.parentNode.removeChild(node);
+                            //         break;
+                            //     }
+                            // }
+                            node.setAttr('_src', node.getAttr('src'));
+                            break;
                     case 'span':
                         if (browser.webkit && (val = node.getStyle('white-space'))) {
                             if (/nowrap|normal/.test(val)) {
@@ -11110,7 +11110,6 @@ UE.commands['imagefloat'] = {
 
 UE.commands['insertimage'] = {
     execCommand:function (cmd, opt) {
-
         opt = utils.isArray(opt) ? opt : [opt];
         if (!opt.length) {
             return;
@@ -11200,6 +11199,13 @@ UE.commands['insertimage'] = {
     }
 };
 
+UE.commands['insertselfimg'] = {
+    execCommand: function(cmd, opt) {
+        console.log(opt,'self')
+        var me = this;
+        me.execCommand('insertHtml', opt);
+    }
+};
 
 // plugins/justify.js
 /**

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -95,4 +95,93 @@
 
 </script>
 </body>
+</html> -->
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title></title>
+		<script type="text/javascript" src="../internal.js"></script>
+		<script type="text/javascript" src="../../third-party/jquery-1.10.2.min.js"></script>
+		<style type="text/css">
+			.warp {
+				width: 320px;
+				height: 153px;
+				margin-left: 5px;
+				padding: 20px 0 0 15px;
+				position: relative;
+			}
+
+			#url {
+				width: 290px;
+				margin-bottom: 2px;
+				margin-left: -6px;
+				margin-left: -2px\9;
+				*margin-left: 0;
+				_margin-left: 0;
+			}
+
+			.format span {
+				display: inline-block;
+				width: 58px;
+				text-align: center;
+				zoom: 1;
+			}
+
+			table td {
+				padding: 5px 0;
+			}
+
+			#align {
+				width: 65px;
+				height: 23px;
+				line-height: 22px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="warp">
+			<table width="300" cellpadding="0" cellspacing="0">
+				<tr>
+					<td colspan="2" class="format">
+						<label>选择本地图片</label>
+						<input id="selfuploadimg" style="width:200px" id="url" type="file" accept="image/jpeg" value="" />
+					</td>
+				</tr>
+			</table>
+		</div>
+		<script type="text/javascript">
+			var base64str;	
+			insertBase64Img();
+			function insertBase64Img() {
+				$("input[type='file']").change(function() {
+                    debugger
+					var file = this.files[0];
+					if (window.FileReader) {
+						var reader = new FileReader();
+						reader.readAsDataURL(file);
+						//监听文件读取结束后事件    
+						reader.onloadend = function(e) {
+							// console.log(e.target.result + "路径")
+							base64str=e.target.result;
+						};
+					}
+				});
+			}
+			function insertBase64ImgToEditor(){
+                var img ='<img src="'+base64str+'"/>'
+                console.log(img)
+				editor.execCommand('insertselfimg',img);
+			}
+			dialog.onok = insertBase64ImgToEditor;
+		</script>
+	</body>
 </html>

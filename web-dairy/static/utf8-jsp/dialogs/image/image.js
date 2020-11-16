@@ -71,6 +71,7 @@
     }
 
     /* 初始化onok事件 */
+    var $image;
     function initButtons() {
 
         dialog.onok = function () {
@@ -89,10 +90,15 @@
                 case 'upload':
                     list = uploadImage.getInsertList();
                     var count = uploadImage.getQueueCount();
-                    if (count) {
-                        $('.info', '#queueList').html('<span style="color:red;">' + '还有2个未上传文件'.replace(/[\d]/, count) + '</span>');
-                        return false;
-                    }
+                    /**修改源码 */
+               
+                    // if (count) {
+                    //     $('.info', '#queueList').html('<span style="color:red;">' + '还有2个未上传文件'.replace(/[\d]/, count) + '</span>');
+                    //     return false;
+                    // }
+                    /**修改源码**/ 
+                    
+				    editor.execCommand('insertselfimg',$image);
                     break;
                 case 'online':
                     list = onlineImage.getInsertList();
@@ -402,9 +408,21 @@
             });
 
             setState('pedding');
-
+            
             // 当有文件添加进来时执行，负责view的创建
             function addFile(file) {
+					if (window.FileReader) {
+                        var base64str;	
+						var reader = new FileReader();
+						reader.readAsDataURL(file.source.source);
+						//监听文件读取结束后事件    
+						reader.onloadend = function(e) {
+							// console.log(e.target.result + "路径")
+                            base64str=e.target.result;
+                            $image= '<img src="'+base64str+'"/>'
+                        };
+                        
+					}
                 var $li = $('<li id="' + file.id + '">' +
                         '<p class="title">' + file.name + '</p>' +
                         '<p class="imgWrap"></p>' +
@@ -658,7 +676,7 @@
 
                 $info.html(text);
             }
-
+            var base64str;
             uploader.on('fileQueued', function (file) {
                 fileCount++;
                 fileSize += file.size;
@@ -669,6 +687,7 @@
                 }
 
                 addFile(file);
+                
             });
 
             uploader.on('fileDequeued', function (file) {
@@ -707,7 +726,7 @@
             uploader.on('uploadBeforeSend', function (file, data, header) {
                 //这里可以通过data对象添加POST参数
                 // header['X_Requested_With'] = 'XMLHttpRequest';
-                header['X-AIYANGNIU-SIGNATURE'] = localStorage.token;
+                header['X-AIYANGNIU-SIGNATURE'] = localStorage.aynUserToken;
             });
 
             uploader.on('uploadProgress', function (file, percentage) {
@@ -722,7 +741,7 @@
             uploader.on('uploadSuccess', function (file, ret) {
                 var $file = $('#' + file.id);
                 var _ret = ret;
-                ret = {'url':_ret.data,'state': _ret.code == '101' ? 'SUCCESS' : "FAIL" ,'title':'图片'}
+                ret = {'url':_ret.data,'state': _ret.code == '0' ? 'SUCCESS' : "FAIL" ,'title':'图片'}
                 try {
                     var responseText = (ret._raw || JSON.stringify(ret)),
                         json = utils.str2json(responseText);

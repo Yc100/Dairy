@@ -132,7 +132,8 @@ export default {
 
 					{name:'Dairy管理',url:'',iconName:'el-icon-notebook-1',privileges:[
                         {name:'WriteDairy',url:'writeDairy',privileges:[],admin:0},
-                        {name:'Dairy列表',url:'dairyManage',privileges:[],admin:0},
+						{name:'我的Dairy列表',url:'myDairyManage',privileges:[],admin:0},
+						{name:'公开的Dairy',url:'dairyManage',privileges:[],admin:0},
 					],admin:0},
 					//{name:'netty测试',url:'nettyTest',iconName:'el-icon-user-solid',privileges:[],admin:0},
 					{name:'我的关注',url:'myFocu',iconName:'el-icon-user-solid',privileges:[],admin:0},
