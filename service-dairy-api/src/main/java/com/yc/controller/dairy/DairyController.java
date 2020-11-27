@@ -10,6 +10,7 @@ import com.yc.common.entity.dairy.DairyReadEntity;
 import com.yc.common.entity.sys.SysUserEntity;
 import com.yc.common.exception.ApplicationException;
 import com.yc.common.page.PageData;
+import com.yc.common.utils.CommonBase64Utils;
 import com.yc.common.utils.Result;
 import com.yc.controller.BasicController;
 import com.yc.service.dairy.DairyService;
@@ -76,6 +77,7 @@ public class DairyController extends BasicController {
 	public Result<DairyEntity> getOne(@RequestParam(value = "dairyId") long dairyId) {
 
 		DairyEntity dairyEntity = dairyService.selectById(dairyId);
+		dairyEntity.setMainText(CommonBase64Utils.decryptBASE64(dairyEntity.getMainText().toString()));
 		SysUserEntity sysUserEntity = sysUserService.getUserInfo(dairyEntity.getUserId());
 		dairyEntity.setSysUserEntity(sysUserEntity);
 		dairyEntity.setReadCount(dairyService.getReadCountByDairyId(dairyId));
@@ -120,6 +122,7 @@ public class DairyController extends BasicController {
 
 		dairyEntity.setUserId(getUserId());
 		dairyEntity.setCreateDate(new Date());
+		dairyEntity.setMainText(CommonBase64Utils.encryptBASE64(dairyEntity.getMainText()));
 		dairyEntity.setDeleted("0");
 		this.dairyService.insert(dairyEntity);
 		return new Result().ok("保存成功");
@@ -143,6 +146,7 @@ public class DairyController extends BasicController {
 
 		dairyEntity.setUserId(getUserId());
 		dairyEntity.setUpdateDate(new Date());
+		dairyEntity.setMainText(CommonBase64Utils.encryptBASE64(dairyEntity.getMainText()));
 		this.dairyService.updateById(dairyEntity);
 		return new Result().ok("保存成功");
 	}
